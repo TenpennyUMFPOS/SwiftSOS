@@ -19,7 +19,7 @@ export const Message = ({
     getUser().then((user) => setUser(user));
   }, []);
   const getUser = async () => {
-    const userQuerry = await getUserById(userId);
+    const userQuerry = await getUserById(data.senderId);
     return userQuerry;
   };
   return (

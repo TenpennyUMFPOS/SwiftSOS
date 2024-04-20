@@ -32,6 +32,7 @@ import {
   participantsCollectionRef,
 } from "../../../firebase";
 import { DocumentData, getDocs, query, where } from "firebase/firestore";
+import { MessageInput } from "../_components/MessageInput";
 
 export default async function Dashboard() {
   const { userId } = auth();
@@ -97,45 +98,7 @@ export default async function Dashboard() {
           <div className="flex-1 ">
             {ambulanceId && <Chat ambulanceId={ambulanceId} userId={userId} />}
           </div>
-          <form className="bottom-5 fixed   min-w-[82vw]  md:min-w-[43vw] lg:min-w-[58vw] overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring">
-            <Label htmlFor="message" className="sr-only">
-              Message
-            </Label>
-            <Textarea
-              id="message"
-              placeholder="Type your message here..."
-              className="min-h-12 resize-none border-0 p-3 shadow-none focus-visible:ring-0"
-            />
-
-            <div className="flex items-center p-3 pt-0">
-              {/* <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button variant="ghost" size="icon">
-                        <Paperclip className="size-4" />
-                        <span className="sr-only">Attach file</span>
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent side="top">Attach File</TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button variant="ghost" size="icon">
-                        <Mic className="size-4" />
-                        <span className="sr-only">Use Microphone</span>
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent side="top">Use Microphone</TooltipContent>
-                  </Tooltip>
-                </TooltipProvider> */}
-              <Button type="button" size="sm" className="ml-auto gap-1.5">
-                Send Message
-                <CornerDownLeft className="size-3.5" />
-              </Button>
-            </div>
-          </form>
+          <MessageInput userId={userId} ambulanceId={ambulanceId} />
         </div>
       </main>
     </div>
