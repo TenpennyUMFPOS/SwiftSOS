@@ -14,6 +14,7 @@ export const MessageInput = ({
   userId: string;
   ambulanceId: string;
 }) => {
+    
   const [input, setInput] = useState("");
   const handleSendMessage = () => {
     setInput("");

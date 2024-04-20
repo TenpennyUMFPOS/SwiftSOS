@@ -21,6 +21,7 @@ export const Chat = ({
   ambulanceId: string;
   userId: string;
 }) => {
+    
   const [messages, setMessages] = useState<FirebaseResponse[]>([]);
   const [avatarColor, setAvatarColor] = useState<string>("");
 
