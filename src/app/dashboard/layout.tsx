@@ -1,7 +1,7 @@
 import { RedirectType, redirect } from "next/navigation";
 import Aside from "../_components/aside";
 import { auth } from "@clerk/nextjs/server";
-import isUserReady from "../actions/isUserReady";
+import isUserReady from "../_actions/isUserReady";
 import {
   collection,
   query,
