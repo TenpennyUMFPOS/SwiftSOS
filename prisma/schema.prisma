@@ -32,3 +32,17 @@ model Skill {
 
   @@unique([user_id, id])
 }
+
+model Training {
+  id          String  @id @default(uuid()) @map("_id")
+  description String
+  images      Image[]
+}
+
+model Image {
+  id          String   @id @default(uuid()) @map("_id")
+  url         String
+  description String?
+  training    Training @relation(fields: [trainingId], references: [id])
+  trainingId  String
+}

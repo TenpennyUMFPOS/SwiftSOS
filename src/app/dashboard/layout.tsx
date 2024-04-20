@@ -17,28 +17,28 @@ import {
   db,
 } from "../../../firebase";
 export default async function DashboardLayout({
-    children, // will be a page or nested layout
+  children, // will be a page or nested layout
 }: {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-    const { userId } = auth();
-    if (!userId) throw new Error("User not authenticated");
-     const userReady = await isUserReady();
-     if (!userReady) redirect("/complete-profile", RedirectType.replace);
-    const q_mess = query(usersPosCollectionRef, where("userId", "==", userId));
-    const querySnapshot = await getDocs(q_mess);
+  const { userId } = auth();
+  if (!userId) throw new Error("User not authenticated");
+  const userReady = await isUserReady();
+  if (!userReady) redirect("/complete-profile", RedirectType.replace);
+  const q_mess = query(usersPosCollectionRef, where("userId", "==", userId));
+  const querySnapshot = await getDocs(q_mess);
 
-    if (!querySnapshot.empty) {
-      console.log("Document data:", querySnapshot.docs[0].data());
-    } else {
-      addDoc(usersPosCollectionRef, {
-        userId: userId,
-        positionX: 0,
-        positionY: 0,
-      });
-    }
+  if (!querySnapshot.empty) {
+    console.log("Document data:", querySnapshot.docs[0].data());
+  } else {
+    addDoc(usersPosCollectionRef, {
+      userId: userId,
+      positionX: 0,
+      positionY: 0,
+    });
+  }
   return (
-    <div className="overflow-hidden grid h-screen w-full pl-[56px]">
+    <div className=" grid h-screen w-full pl-[56px]">
       <Aside />
       {children}
     </div>

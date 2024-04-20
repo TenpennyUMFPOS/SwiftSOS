@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image';
 import cpr from '../../../../assets/images/cprIll.png';
 import { Button } from '@/components/ui/button';
+import { SquareChevronLeft, SquareChevronRight } from 'lucide-react';
 function Lesson() {
     return (
 
@@ -16,7 +17,7 @@ function Lesson() {
                     <h3 className='text-white text-m font-bold'>Description Description</h3>
                 </div>
                 <div>
-                    <Button className='bg-orange-600 mt-3'>Check it out </Button>
+                    <Button className='bg-orange-600 mt-3 flex flex-row gap-2'>Check it out <SquareChevronRight className="size-5 mt-1" /> </Button>
                 </div>
 
             </div>
