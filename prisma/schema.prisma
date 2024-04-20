@@ -16,7 +16,8 @@ datasource db {
 model User {
   id                          String  @id @default(uuid()) @map("_id")
   username                    String?
-  email                       String  @unique
+  gender                      String
+  birth                       String
   skills                      Skill[]
   profile_completed           Boolean @default(false)
   doNotDisturb                Boolean @default(false)
