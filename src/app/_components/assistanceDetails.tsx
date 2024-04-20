@@ -70,6 +70,7 @@ export const AssistanceDetails = () => {
       clearInterval(intervalID);
     };
   }, []);
+
   return (
     <>
       <fieldset className="grid gap-6 rounded-lg border p-4">
