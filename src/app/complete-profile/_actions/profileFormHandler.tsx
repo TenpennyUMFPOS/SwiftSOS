@@ -59,7 +59,8 @@ export default async function profileFormHandler(formData: FormData) {
                 username: userData.username,
                 gender: userData.gender,
                 birth: userData.birth,
-                emergencyResponseExperience: userData.emergencyResponseExperience
+                emergencyResponseExperience: userData.emergencyResponseExperience,
+                profile_completed: true
             }
         });
 
