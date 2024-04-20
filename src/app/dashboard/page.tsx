@@ -50,15 +50,8 @@ export default async function Dashboard() {
     console.log("No matching documents.");
   } else {
     ambulanceId = querySnapshot.docs[0].data().ambulanceId;
-    /* const q_messages = query(
-      messagesCollectionRef,
-      where("ambulanceId", "==", querySnapshot.docs[0].data().ambulanceId)
-    );
-    const m_querySnapshot = await getDocs(q_messages);
-    m_querySnapshot.forEach((doc) => {
-      messages.push(doc.data());
-    }); */
   }
+
 
   return (
     <div className="flex flex-col">
