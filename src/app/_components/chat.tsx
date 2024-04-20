@@ -34,6 +34,7 @@ export const Chat = ({
       // setMatches(snapshot.docChanges().map(doc => ({ id: doc.id, data: doc.data() })))
       snapshot.docChanges().forEach((change) => {
         if (change.type === "added") {
+          console.log(change.doc.data());
           setMessages((prev) => [
             ...prev,
             { id: change.doc.id, data: change.doc.data() },
@@ -59,7 +60,7 @@ export const Chat = ({
     <ScrollArea className=" h-screen">
       <div className="flex-col space-y-5">
         {messages.map((message) => {
-          console.log(message);
+          console.log(message.id);
           return (
             <Message
               key={message.id}
