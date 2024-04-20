@@ -1,41 +1,24 @@
 import {
-  Bird,
-  Book,
-  Bot,
-  Code2,
   CornerDownLeft,
   LifeBuoy,
-  Mic,
-  Paperclip,
-  Rabbit,
+  ListCollapse,
   Settings,
-  Settings2,
   Share,
-  SquareTerminal,
+  Siren,
   SquareUser,
   Triangle,
-  Turtle,
 } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
   DrawerContent,
-  DrawerDescription,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Input } from "@/components/ui/input";
+
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Tooltip,
@@ -43,17 +26,17 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Description } from "../_components/description";
-import { Instructions } from "../_components/instructions";
 import { AssistanceDetails } from "../_components/assistanceDetails";
-
-export default function Dashboard() {
+import { currentUser } from "@clerk/nextjs/server";
+import { Chat } from "../_components/chat";
+import { ScrollArea } from "@/components/ui/scroll-area";
+export default async function Dashboard() {
   return (
     <div className="grid h-screen w-full pl-[56px]">
       <aside className="inset-y fixed  left-0 z-20 flex h-full flex-col border-r">
         <div className="border-b p-2">
           <Button variant="outline" size="icon" aria-label="Home">
-            <Triangle className="size-5 fill-foreground" />
+            <Siren className="animate-ping size-5 fill-red-500" />
           </Button>
         </div>
         <nav className="grid gap-1 p-2">
@@ -99,8 +82,8 @@ export default function Dashboard() {
           <Drawer>
             <DrawerTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden">
-                <Settings className="size-4" />
-                <span className="sr-only">Settings</span>
+                <ListCollapse className="size-4" />
+                <span className="sr-only">List</span>
               </Button>
             </DrawerTrigger>
             <DrawerContent className="max-h-[80vh]">
@@ -121,7 +104,7 @@ export default function Dashboard() {
             Share
           </Button>
         </header>
-        <main className="grid flex-1 gap-4 overflow-auto p-4 md:grid-cols-2 lg:grid-cols-3">
+        <main className="grid flex-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-3">
           <div
             className="relative hidden flex-col items-start gap-8 md:flex"
             x-chunk="dashboard-03-chunk-0"
@@ -131,11 +114,10 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="relative flex h-full min-h-[50vh] flex-col rounded-xl bg-muted/50 p-4 lg:col-span-2">
-            <div className="flex-1" />
-            <form
-              className="relative overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring"
-              x-chunk="dashboard-03-chunk-1"
-            >
+            <div className="flex-1 ">
+              <Chat />
+            </div>
+            <form className="bottom-5 fixed   min-w-[82vw]  md:min-w-[43vw] lg:min-w-[58vw] overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring">
               <Label htmlFor="message" className="sr-only">
                 Message
               </Label>
@@ -146,7 +128,7 @@ export default function Dashboard() {
               />
 
               <div className="flex items-center p-3 pt-0">
-                <TooltipProvider>
+                {/* <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Button variant="ghost" size="icon">
@@ -167,8 +149,8 @@ export default function Dashboard() {
                     </TooltipTrigger>
                     <TooltipContent side="top">Use Microphone</TooltipContent>
                   </Tooltip>
-                </TooltipProvider>
-                <Button type="submit" size="sm" className="ml-auto gap-1.5">
+                </TooltipProvider> */}
+                <Button type="button" size="sm" className="ml-auto gap-1.5">
                   Send Message
                   <CornerDownLeft className="size-3.5" />
                 </Button>
