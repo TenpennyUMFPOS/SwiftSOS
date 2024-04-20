@@ -45,13 +45,12 @@ export default async function Dashboard() {
 
   let ambulanceId = null;
   const querySnapshot = await getDocs(q_participants);
-
   if (querySnapshot.empty) {
     console.log("No matching documents.");
   } else {
     ambulanceId = querySnapshot.docs[0].data().ambulanceId;
   }
-
+  let noParticipation = querySnapshot.empty;
 
   return (
     <div className="flex flex-col">
@@ -78,22 +77,30 @@ export default async function Dashboard() {
           Share
         </Button>
       </header>
-      <main className="grid flex-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-3">
-        <div
-          className="relative hidden flex-col items-start gap-8 md:flex"
-          x-chunk="dashboard-03-chunk-0"
-        >
-          <div className="grid w-full items-start gap-6">
-            <AssistanceDetails />
-          </div>
+      {noParticipation ? (
+        <div className="flex-1 items-center justify-center ">
+          <h1 className="font-bold text-2xl">No ambulances nearby</h1>
         </div>
-        <div className="relative flex h-full min-h-[50vh] flex-col rounded-xl bg-muted/50 p-4 lg:col-span-2">
-          <div className="flex-1 ">
-            {ambulanceId && <Chat ambulanceId={ambulanceId} userId={userId} />}
+      ) : (
+        <main className="grid flex-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-3">
+          <div
+            className="relative hidden flex-col items-start gap-8 md:flex"
+            x-chunk="dashboard-03-chunk-0"
+          >
+            <div className="grid w-full items-start gap-6">
+              <AssistanceDetails />
+            </div>
           </div>
-          <MessageInput userId={userId} ambulanceId={ambulanceId} />
-        </div>
-      </main>
+          <div className="relative flex h-full min-h-[50vh] flex-col rounded-xl bg-muted/50 p-4 lg:col-span-2">
+            <div className="flex-1 ">
+              {ambulanceId && (
+                <Chat ambulanceId={ambulanceId} userId={userId} />
+              )}
+            </div>
+            <MessageInput userId={userId} ambulanceId={ambulanceId} />
+          </div>
+        </main>
+      )}
     </div>
   );
 }
