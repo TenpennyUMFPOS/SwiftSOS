@@ -18,6 +18,7 @@ model User {
   username                    String?
   email                       String  @unique
   skills                      Skill[]
+  profile_completed           Boolean @default(false)
   doNotDisturb                Boolean @default(false)
   emergencyResponseExperience String?
 }
