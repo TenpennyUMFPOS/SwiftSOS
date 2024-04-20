@@ -19,12 +19,15 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useClerk } from "@clerk/nextjs";
 
 export default function Aside() {
     const { signOut } = useClerk();
     const router = useRouter();
+    function redirectTraining() {
+        router.push('/dashboard/training')
+    }
     return (
         <aside className="inset-y fixed  left-0 z-20 flex h-full flex-col border-r">
             <div className="border-b p-2">
@@ -41,6 +44,7 @@ export default function Aside() {
                                 size="icon"
                                 className="mt-auto rounded-lg"
                                 aria-label="Account"
+                                onClick={() => router.push('/dashboard')}
                             >
                                 <SquareUser className="size-5" />
                             </Button>
@@ -58,6 +62,7 @@ export default function Aside() {
                                 size="icon"
                                 className="mt-auto rounded-lg"
                                 aria-label="Help"
+
                             >
                                 <LifeBuoy className="size-5" />
                             </Button>
@@ -73,7 +78,7 @@ export default function Aside() {
                                 size="icon"
                                 className="mt-auto rounded-lg"
                                 aria-label="Training"
-                                onClick={() => signOut(() => router.push("/"))}
+                                onClick={redirectTraining}
                             >
                                 <Dumbbell className="size-5" />
                             </Button>
