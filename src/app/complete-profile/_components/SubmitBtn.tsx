@@ -1,4 +1,5 @@
-import { Button } from "../../components/ui/Button";
+
+import { Button } from "@/components/ui/button";
 import { useClerk } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useFormStatus } from "react-dom";

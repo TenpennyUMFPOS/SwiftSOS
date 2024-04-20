@@ -25,12 +25,10 @@ export default async function DashboardLayout({
     if (!userId) throw new Error("User not authenticated");
      const userReady = await isUserReady();
      if (!userReady) redirect("/complete-profile", RedirectType.replace);
-    const q_mess = query(usersPosCollectionRef, where("userId", "==", userId));
-    const querySnapshot = await getDocs(q_mess);
+    const q_user = query(usersPosCollectionRef, where("userId", "==", userId));
+    const querySnapshot = await getDocs(q_user);
 
-    if (!querySnapshot.empty) {
-      console.log("Document data:", querySnapshot.docs[0].data());
-    } else {
+    if (querySnapshot.empty) {
       addDoc(usersPosCollectionRef, {
         userId: userId,
         positionX: 0,

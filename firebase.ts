@@ -23,7 +23,7 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const usersPosCollectionRef = collection(db, "users");
 export const ambulancesPosCollectionRef = collection(db, "ambulances");
-export const channelsCollectionRef = collection(db, "channels");
+export const participantsCollectionRef = collection(db, "participants");
 export const messagesCollectionRef = collection(db, "messages");
 
 export const storage = getStorage();

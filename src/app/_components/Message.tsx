@@ -1,25 +1,40 @@
+"use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-export const Message = () => {
+import { FirebaseResponse } from "@/utils/types";
+import { User } from "@prisma/client";
+import { DocumentData } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import getUserById from "../_actions/getUserById";
+export const Message = ({
+  data,
+  userId,
+  avatarColor,
+}: {
+  data: DocumentData;
+  userId: string;
+  avatarColor: string;
+}) => {
+  const [user, setUser] = useState<User | null>();
+  useEffect(() => {
+    getUser().then((user) => setUser(user));
+  }, []);
+  const getUser = async () => {
+    const userQuerry = await getUserById(userId);
+    return userQuerry;
+  };
   return (
     <div className="flex items-start space-x-2">
-      <Avatar>
-        <AvatarImage src="https://github.com/shadcn.png" />
-        <AvatarFallback>CN</AvatarFallback>
-      </Avatar>
+      <div
+        style={{ backgroundColor: `${avatarColor}` }}
+        className="w-10 h-10 flex justify-center items-center rounded-full"
+      >
+        {/* <AvatarImage src="https://github.com/shadcn.png" /> */}
+        <div>CN</div>
+      </div>
       <div className="flex-col">
-        <span className="font-semibold">El Hadji Mamadou</span>
+        <span className="font-semibold">{user?.username}</span>
 
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum.
-        </p>
+        <p>{data.message}</p>
       </div>
     </div>
   );
