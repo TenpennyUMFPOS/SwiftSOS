@@ -1,13 +1,11 @@
 import React from 'react'
 import { CustomSignOutButton } from './signOutButton'
 
-function Dashboard() {
+export default function Dashboard() {
     return (
-        <div>
-            You in dashboard bruh
-            <CustomSignOutButton />
+        <div className="">
+
         </div>
     )
 }
 
-export default Dashboard
