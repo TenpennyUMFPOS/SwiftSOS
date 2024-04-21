@@ -15,7 +15,9 @@ import {
   messagesCollectionRef,
   usersPosCollectionRef,
   db,
+  participantsCollectionRef,
 } from "../../../firebase";
+import calculateDistance from "../_actions/calculateDistance";
 export default async function DashboardLayout({
   children, // will be a page or nested layout
 }: {
@@ -35,6 +37,25 @@ export default async function DashboardLayout({
       positionY: 0,
     });
   }
+  let stop_interval = false;
+  function executeEvery10Seconds(userId: string) {
+    const intervalID = setInterval(async () => {
+      const q_part = query(
+        participantsCollectionRef,
+        where("userId", "==", userId)
+      );
+      const part_querySnapshot = await getDocs(q_part);
+      if (part_querySnapshot.empty) {
+        calculateDistance(userId);
+        stop_interval = true;
+      }
+    }, 10000);
+
+    return intervalID;
+  }
+
+  const intervalID = executeEvery10Seconds(userId);
+  if (stop_interval) clearInterval(intervalID);
   return (
     <div className=" grid h-screen w-full pl-[56px]">
       <Aside />
